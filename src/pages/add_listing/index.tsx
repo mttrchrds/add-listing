@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Container from "@mui/material/Container";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -29,7 +29,7 @@ const StyledAddListing = styled("div")(({ theme }) => {
 });
 
 const AddListing: React.FC = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  // const [activeStep, setActiveStep] = useState(0);
   const steps = [
     "Property location",
     "Property details",

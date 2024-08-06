@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 
-const StyledStepLocation = styled("nav")(({ theme }) => {
+const StyledStepLocation = styled("nav")(() => {
   return `
     display: block;
   `;
