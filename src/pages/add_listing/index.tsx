@@ -1,13 +1,15 @@
-// import { useState } from "react";
+import { useState } from "react";
+
 import Container from "@mui/material/Container";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
-import Paper from "@mui/material/Paper";
 import NavTop from "./components/navigation/nav_top";
 import StepLocation from "./components/steps/step_location";
+import StepPropertyDetails from "./components/steps/step_property_details";
+import StepTenancyDetails from "./components/steps/step_tenancy_details";
 
 const StyledAddListing = styled("div")(({ theme }) => {
   return `
@@ -29,7 +31,7 @@ const StyledAddListing = styled("div")(({ theme }) => {
 });
 
 const AddListing: React.FC = () => {
-  // const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const steps = [
     "Property location",
     "Property details",
@@ -40,12 +42,65 @@ const AddListing: React.FC = () => {
     "Publish",
   ];
 
-  const handleViewedStep = (stepIndex: number) => {
-    console.log("VIEWED STEP", stepIndex);
+  console.log({ activeStep });
+
+  const handleBackStep = () => {
+    console.log("clicking back");
+    setActiveStep((as) => as - 1);
+  };
+
+  const handleSubmitLocation = (payload: unknown) => {
+    console.log("Submitting location", payload);
+    setActiveStep((a) => a + 1);
+  };
+
+  const handleSubmitPropertyDetails = (payload: unknown) => {
+    console.log("Submitting property details", payload);
+    setActiveStep((a) => a + 1);
+  };
+
+  const handleSubmitTenancyDetails = (payload: unknown) => {
+    console.log("Submitting tenancy details", payload);
+    // setActiveStep((a) => a + 1);
   };
 
   const renderStep = () => {
-    return <StepLocation stepIndex={0} viewedCallback={handleViewedStep} />;
+    switch (activeStep) {
+      case 0:
+        return (
+          <StepLocation
+            backCallback={handleBackStep}
+            nextCallback={handleSubmitLocation}
+          />
+        );
+      case 1:
+        return (
+          <StepPropertyDetails
+            backCallback={handleBackStep}
+            nextCallback={handleSubmitPropertyDetails}
+          />
+        );
+      case 2:
+        return (
+          <StepTenancyDetails
+            backCallback={handleBackStep}
+            nextCallback={handleSubmitTenancyDetails}
+          />
+        );
+      default:
+        return (
+          <StepLocation
+            backCallback={handleBackStep}
+            nextCallback={handleSubmitLocation}
+          />
+        );
+    }
+    return (
+      <StepLocation
+        backCallback={handleBackStep}
+        nextCallback={handleSubmitLocation}
+      />
+    );
   };
 
   return (
@@ -55,7 +110,7 @@ const AddListing: React.FC = () => {
         <Grid container spacing={2}>
           <Grid xs={12}>
             <div className="stepper-container">
-              <Stepper nonLinear alternativeLabel>
+              <Stepper nonLinear alternativeLabel activeStep={activeStep}>
                 {steps.map((s) => (
                   <Step key={s}>
                     <StepLabel>{s}</StepLabel>
@@ -64,17 +119,7 @@ const AddListing: React.FC = () => {
               </Stepper>
             </div>
           </Grid>
-          <Grid xs={12}>
-            <Paper>
-              <Grid container xs={12} spacing={2}>
-                <Grid xs>&nbsp;</Grid>
-                <Grid xs={8}>
-                  <section className="stepper-content">{renderStep()}</section>
-                </Grid>
-                <Grid xs>&nbsp;</Grid>
-              </Grid>
-            </Paper>
-          </Grid>
+          <Grid xs={12}>{renderStep()}</Grid>
         </Grid>
       </Container>
     </StyledAddListing>

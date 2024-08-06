@@ -3,18 +3,18 @@ import { styled } from "@mui/material/styles";
 import StepContainer from "./step_container";
 import NavBottom from "../navigation/nav_bottom";
 
-const StyledStepLocation = styled("div")(() => {
+const StyledStepPropertyDetails = styled("div")(() => {
   return `
     display: block;
   `;
 });
 
-interface StepLocationProps {
+interface StepPropertyDetailsProps {
   backCallback: () => void;
   nextCallback: (payload: unknown) => void;
 }
 
-const StepLocation: React.FC<StepLocationProps> = ({
+const StepPropertyDetails: React.FC<StepPropertyDetailsProps> = ({
   backCallback,
   nextCallback,
 }) => {
@@ -29,17 +29,16 @@ const StepLocation: React.FC<StepLocationProps> = ({
   };
 
   return (
-    <StyledStepLocation>
+    <StyledStepPropertyDetails>
       <StepContainer>
-        <div>[STEP LOCATION]</div>
+        <div>[STEP PROPERTY DETAILS]</div>
       </StepContainer>
       <NavBottom
-        firstStep={true}
         backCallback={handleClickBack}
         nextCallback={handleSubmitStep}
       />
-    </StyledStepLocation>
+    </StyledStepPropertyDetails>
   );
 };
 
-export default StepLocation;
+export default StepPropertyDetails;
