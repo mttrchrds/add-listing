@@ -32,20 +32,20 @@ const StyledAddListing = styled("div")(({ theme }) => {
 });
 
 const AddListing: React.FC = () => {
-  const [activeStep, setActiveStep] = useState(1);
+  const [activeStep, setActiveStep] = useState(0);
 
-  // const [address1, setAddress1] = useState("");
-  // const [address2, setAddress2] = useState("");
-  // const [address3, setAddress3] = useState("");
-  // const [postCode, setPostCode] = useState("");
-  // const [lat, setLat] = useState(0);
-  // const [lng, setLng] = useState(0);
-  const [address1, setAddress1] = useState("136c Stroud Green Road");
+  const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
-  const [address3, setAddress3] = useState("London");
-  const [postCode, setPostCode] = useState("N4 3RZ");
-  const [lat, setLat] = useState(51.5693653);
-  const [lng, setLng] = useState(-0.1118666);
+  const [address3, setAddress3] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+  // const [address1, setAddress1] = useState("136c Stroud Green Road");
+  // const [address2, setAddress2] = useState("");
+  // const [address3, setAddress3] = useState("London");
+  // const [postCode, setPostCode] = useState("N4 3RZ");
+  // const [lat, setLat] = useState(51.5693653);
+  // const [lng, setLng] = useState(-0.1118666);
 
   const [advertType, setAdvertType] = useState(AdvertType.WHOLE);
   const [propertyType, setPropertyType] = useState("");
