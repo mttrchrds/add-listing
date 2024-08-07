@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { AdvertType } from "../../utils/enums";
+
 import Container from "@mui/material/Container";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -7,24 +9,23 @@ import StepLabel from "@mui/material/StepLabel";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Unstable_Grid2";
 import NavTop from "./components/navigation/nav_top";
-import StepLocation from "./components/steps/step_location";
-import StepPropertyDetails from "./components/steps/step_property_details";
+import StepLocation, {
+  LocationPayload,
+} from "./components/steps/step_location";
+import StepPropertyDetails, {
+  PropertyDetailsPayload,
+} from "./components/steps/step_property_details";
 import StepTenancyDetails from "./components/steps/step_tenancy_details";
 
 const StyledAddListing = styled("div")(({ theme }) => {
   return `
+    padding-bottom: 30px;
     .stepper-container {
       margin: 20px 0;
-    }
-    .stepper-content {
-      padding: 20px 0;
     }
     @media screen and (min-width: ${theme.breakpoints.values.md}px) {
       .stepper-container {
         margin: 40px 0;
-      }
-      .stepper-content {
-        padding: 40px 0;
       }
     }
   `;
@@ -32,6 +33,22 @@ const StyledAddListing = styled("div")(({ theme }) => {
 
 const AddListing: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
+
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [address3, setAddress3] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [lat, setLat] = useState(0);
+  const [lng, setLng] = useState(0);
+  // const [address1, setAddress1] = useState("136c Stroud Green Road");
+  // const [address2, setAddress2] = useState("");
+  // const [address3, setAddress3] = useState("London");
+  // const [postCode, setPostCode] = useState("N4 3RZ");
+  // const [lat, setLat] = useState(51.5693653);
+  // const [lng, setLng] = useState(-0.1118666);
+
+  const [advertType, setAdvertType] = useState(AdvertType.WHOLE);
+
   const steps = [
     "Property location",
     "Property details",
@@ -42,20 +59,23 @@ const AddListing: React.FC = () => {
     "Publish",
   ];
 
-  console.log({ activeStep });
-
   const handleBackStep = () => {
-    console.log("clicking back");
     setActiveStep((as) => as - 1);
   };
 
-  const handleSubmitLocation = (payload: unknown) => {
-    console.log("Submitting location", payload);
+  const handleSubmitLocation = (payload: LocationPayload) => {
+    setAddress1(payload.address1);
+    setAddress2(payload.address2);
+    setAddress3(payload.address3);
+    setPostCode(payload.postCode);
+    setLat(payload.lat);
+    setLng(payload.lng);
     setActiveStep((a) => a + 1);
   };
 
-  const handleSubmitPropertyDetails = (payload: unknown) => {
+  const handleSubmitPropertyDetails = (payload: PropertyDetailsPayload) => {
     console.log("Submitting property details", payload);
+    setAdvertType(payload.advertType);
     setActiveStep((a) => a + 1);
   };
 
@@ -69,6 +89,12 @@ const AddListing: React.FC = () => {
       case 0:
         return (
           <StepLocation
+            address1={address1}
+            address2={address2}
+            address3={address3}
+            postCode={postCode}
+            lat={lat}
+            lng={lng}
             backCallback={handleBackStep}
             nextCallback={handleSubmitLocation}
           />
@@ -76,6 +102,7 @@ const AddListing: React.FC = () => {
       case 1:
         return (
           <StepPropertyDetails
+            advertType={advertType}
             backCallback={handleBackStep}
             nextCallback={handleSubmitPropertyDetails}
           />
@@ -90,17 +117,17 @@ const AddListing: React.FC = () => {
       default:
         return (
           <StepLocation
+            address1={address1}
+            address2={address2}
+            address3={address3}
+            postCode={postCode}
+            lat={lat}
+            lng={lng}
             backCallback={handleBackStep}
             nextCallback={handleSubmitLocation}
           />
         );
     }
-    return (
-      <StepLocation
-        backCallback={handleBackStep}
-        nextCallback={handleSubmitLocation}
-      />
-    );
   };
 
   return (

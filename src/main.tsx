@@ -6,6 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { APIProvider } from "@vis.gl/react-google-maps";
 
 const theme = createTheme({
   palette: {
@@ -18,10 +19,10 @@ const theme = createTheme({
 });
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <>
+  <APIProvider apiKey={import.meta.env.VITE_GOOGLE_API_KEY}>
     <CssBaseline />
     <ThemeProvider theme={theme}>
       <AddListing />
     </ThemeProvider>
-  </>
+  </APIProvider>
 );
