@@ -16,12 +16,49 @@ import StepPropertyDetails, {
   PropertyDetailsPayload,
 } from "./components/steps/step_property_details";
 import StepTenancyDetails from "./components/steps/step_tenancy_details";
+import Typography from "@mui/material/Typography";
 
 const StyledAddListing = styled("div")(({ theme }) => {
   return `
     padding-bottom: 30px;
     .stepper-container {
       margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .stepper-container-primary {
+      display: flex;
+      align-items: center;
+    }
+    .stepper-container-secondary {
+      display: flex;
+      align-items: center;
+    }
+    .stepper-container-icon {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: ${theme.palette.primary.main};
+      border-radius: 50%;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      margin-right: 10px;
+    }
+    .stepper-container-sm {
+      display: none;
+    }
+    @media screen and (min-width: ${theme.breakpoints.values.sm}px) {
+      .stepper-container {
+        display: none;
+      }
+      .stepper-container-sm {
+        margin: 40px 0;
+        display: block;
+      }
     }
     @media screen and (min-width: ${theme.breakpoints.values.md}px) {
       .stepper-container {
@@ -177,6 +214,18 @@ const AddListing: React.FC = () => {
         <Grid container spacing={2}>
           <Grid xs={12}>
             <div className="stepper-container">
+              <div className="stepper-container-primary">
+                <div className="stepper-container-icon">{activeStep + 1}</div>
+                <div className="stepper-container-title">
+                  <Typography variant="body1">Add/edit listing</Typography>
+                  <Typography variant="h6">{steps[activeStep]}</Typography>
+                </div>
+              </div>
+              <div className="stepper-container-secondary">
+                Step {activeStep + 1} / {steps.length}
+              </div>
+            </div>
+            <div className="stepper-container-sm">
               <Stepper nonLinear alternativeLabel activeStep={activeStep}>
                 {steps.map((s) => (
                   <Step key={s}>

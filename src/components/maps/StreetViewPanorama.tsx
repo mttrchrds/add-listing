@@ -41,7 +41,7 @@ const StreetViewPanorama: React.FC<StreetViewPanoramaProps> = ({
   }, [streetViewLib, map, lat, lng]);
 
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
       <div style={{ width: "100%", height: "350px" }}>
         <GoogleMap
           center={{

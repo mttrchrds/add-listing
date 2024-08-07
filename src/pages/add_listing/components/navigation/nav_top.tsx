@@ -22,7 +22,7 @@ const StyledNavTop = styled("nav")(({ theme }) => {
       }
     }
     .title {
-      flex-shrink: 0;
+      display: none;
     }
     .actions {
       flex-grow: 1;
@@ -34,7 +34,10 @@ const StyledNavTop = styled("nav")(({ theme }) => {
     border-bottom: 2px solid ${theme.palette.primary.light};
     @media screen and (min-width: ${theme.breakpoints.values.sm}px) {
       .logo {}
-      .title {}
+      .title {
+        display: block;
+        flex-shrink: 0;
+      }
       .actions {}
     }
     @media screen and (min-width: ${theme.breakpoints.values.lg}px) {

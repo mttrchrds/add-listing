@@ -32,6 +32,14 @@ const OptionCategory = styled(ListSubheader)<ListSubheaderProps>(() => ({
 
 const StyledStepPropertyDetails = styled("div")(({ theme }) => {
   return `
+    .advert-type {
+      svg {
+        display: none;
+      }
+      p {
+        margin-left: 0;
+      }
+    }
     .custom-description {
       p {
         margin: 0;
@@ -41,6 +49,16 @@ const StyledStepPropertyDetails = styled("div")(({ theme }) => {
         text-decoration: underline;
         &:hover {
           text-decoration: none;
+        }
+      }
+    }
+    @media screen and (min-width: ${theme.breakpoints.values.sm}px) {
+      .advert-type {
+        svg {
+          display: block;
+        }
+        p {
+          margin-left: 10px;
         }
       }
     }
@@ -276,20 +294,26 @@ const StepPropertyDetails: React.FC<StepPropertyDetailsProps> = ({
             fullWidth={true}
           >
             <ToggleButton value={AdvertType.WHOLE}>
-              <Stack spacing={2} direction="row">
-                <HouseIcon />
-                <Typography variant="body1" paragraph={true}>
-                  Whole Property
-                </Typography>
-              </Stack>
+              <div className="advert-type">
+                <Stack spacing={2} direction="row">
+                  <HouseIcon />
+                  <Typography variant="body1" paragraph={true}>
+                    Whole Property
+                  </Typography>
+                </Stack>
+              </div>
             </ToggleButton>
             <ToggleButton value={AdvertType.ROOM}>
-              <Stack spacing={2} direction="row">
-                <SingleBedIcon />
-                <Typography variant="body1" paragraph={true}>
-                  Single room
-                </Typography>
-              </Stack>
+              <div className="advert-type">
+                <Stack spacing={2} direction="row">
+                  <div className="advert-type-icon">
+                    <SingleBedIcon />
+                  </div>
+                  <Typography variant="body1" paragraph={true}>
+                    Single room
+                  </Typography>
+                </Stack>
+              </div>
             </ToggleButton>
           </ToggleButtonGroup>
           <FormControl>
@@ -338,7 +362,7 @@ const StepPropertyDetails: React.FC<StepPropertyDetailsProps> = ({
             <MenuItem value="tenant">Furnishing at tenant choice</MenuItem>
           </TextField>
           <Grid container spacing={3}>
-            <Grid xs={12} sm={6}>
+            <Grid item={true} xs={12} sm={6}>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -352,7 +376,7 @@ const StepPropertyDetails: React.FC<StepPropertyDetailsProps> = ({
                 />
               </FormGroup>
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid item={true} xs={12} sm={6}>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -366,7 +390,7 @@ const StepPropertyDetails: React.FC<StepPropertyDetailsProps> = ({
                 />
               </FormGroup>
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid item={true} xs={12} sm={6}>
               <FormGroup>
                 <FormControlLabel
                   control={
@@ -380,7 +404,7 @@ const StepPropertyDetails: React.FC<StepPropertyDetailsProps> = ({
                 />
               </FormGroup>
             </Grid>
-            <Grid xs={12} sm={6}>
+            <Grid item={true} xs={12} sm={6}>
               <FormGroup>
                 <FormControlLabel
                   control={

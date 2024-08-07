@@ -23,11 +23,15 @@ const StepContainer: React.FC<StepContainerProps> = ({ children }) => {
   return (
     <StyledStepContainer>
       <Grid container>
-        <Grid xs={2}>&nbsp;</Grid>
-        <Grid xs={8}>
+        <Grid xs={0} sm={1} md={2}>
+          &nbsp;
+        </Grid>
+        <Grid xs={12} sm={10} md={8}>
           <div className="step-container">{children}</div>
         </Grid>
-        <Grid xs={2}>&nbsp;</Grid>
+        <Grid xs={0} sm={1} md={2}>
+          &nbsp;
+        </Grid>
       </Grid>
     </StyledStepContainer>
   );
