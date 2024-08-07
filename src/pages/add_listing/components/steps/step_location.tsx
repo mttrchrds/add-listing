@@ -252,7 +252,7 @@ const StepLocation: React.FC<StepLocationProps> = ({
   return (
     <StyledStepLocation>
       <StepContainer>
-        <Stack spacing={2}>
+        <Stack spacing={3}>
           {renderLatLngError()}
           <GoogleMapsPlacesAutocomplete
             selectedCallback={handleGoogleMapsPlacesAutoCompleteCallback}

@@ -5,6 +5,8 @@ import Grid from "@mui/material/Unstable_Grid2";
 const StyledNavBottom = styled("nav")(({ theme }) => {
   return `
     margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid ${theme.palette.primary.light};
     .prev-container {
       display: flex;
       justify-content: flex-start;
@@ -20,6 +22,7 @@ const StyledNavBottom = styled("nav")(({ theme }) => {
     }
     @media screen and (min-width: ${theme.breakpoints.values.lg}px) {
       margin-top: 40px;
+      padding-top: 40px;
     }
   `;
 });

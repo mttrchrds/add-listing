@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { AdvertType } from "../../utils/enums";
+import { AdvertType, DescriptionType } from "../../utils/enums";
 
 import Container from "@mui/material/Container";
 import Stepper from "@mui/material/Stepper";
@@ -32,22 +32,32 @@ const StyledAddListing = styled("div")(({ theme }) => {
 });
 
 const AddListing: React.FC = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(1);
 
-  const [address1, setAddress1] = useState("");
-  const [address2, setAddress2] = useState("");
-  const [address3, setAddress3] = useState("");
-  const [postCode, setPostCode] = useState("");
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
-  // const [address1, setAddress1] = useState("136c Stroud Green Road");
+  // const [address1, setAddress1] = useState("");
   // const [address2, setAddress2] = useState("");
-  // const [address3, setAddress3] = useState("London");
-  // const [postCode, setPostCode] = useState("N4 3RZ");
-  // const [lat, setLat] = useState(51.5693653);
-  // const [lng, setLng] = useState(-0.1118666);
+  // const [address3, setAddress3] = useState("");
+  // const [postCode, setPostCode] = useState("");
+  // const [lat, setLat] = useState(0);
+  // const [lng, setLng] = useState(0);
+  const [address1, setAddress1] = useState("136c Stroud Green Road");
+  const [address2, setAddress2] = useState("");
+  const [address3, setAddress3] = useState("London");
+  const [postCode, setPostCode] = useState("N4 3RZ");
+  const [lat, setLat] = useState(51.5693653);
+  const [lng, setLng] = useState(-0.1118666);
 
   const [advertType, setAdvertType] = useState(AdvertType.WHOLE);
+  const [propertyType, setPropertyType] = useState("");
+  const [bedroomsNumber, setBedroomsNumber] = useState(0);
+  const [bathroomsNumber, setBathroomsNumber] = useState(0);
+  const [furnishing, setFurnishing] = useState("");
+  const [billsIncluded, setBillsIncluded] = useState(false);
+  const [gardenAccess, setGardenAccess] = useState(false);
+  const [parking, setParking] = useState(false);
+  const [fireplace, setFireplace] = useState(false);
+  const [descriptionType, setDescriptionType] = useState(DescriptionType.AI);
+  const [description, setDescription] = useState("");
 
   const steps = [
     "Property location",
@@ -74,14 +84,18 @@ const AddListing: React.FC = () => {
   };
 
   const handleSubmitPropertyDetails = (payload: PropertyDetailsPayload) => {
-    console.log("Submitting property details", payload);
     setAdvertType(payload.advertType);
+    setPropertyType(payload.propertyType);
+    setBedroomsNumber(payload.bedroomsNumber);
+    setBathroomsNumber(payload.bathroomsNumber);
+    setFurnishing(payload.furnishing);
+    setBillsIncluded(payload.billsIncluded);
+    setGardenAccess(payload.gardenAccess);
+    setParking(payload.parking);
+    setFireplace(payload.fireplace);
+    setDescriptionType(payload.descriptionType);
+    setDescription(payload.description);
     setActiveStep((a) => a + 1);
-  };
-
-  const handleSubmitTenancyDetails = (payload: unknown) => {
-    console.log("Submitting tenancy details", payload);
-    // setActiveStep((a) => a + 1);
   };
 
   const renderStep = () => {
@@ -103,6 +117,16 @@ const AddListing: React.FC = () => {
         return (
           <StepPropertyDetails
             advertType={advertType}
+            propertyType={propertyType}
+            bedroomsNumber={bedroomsNumber}
+            bathroomsNumber={bathroomsNumber}
+            furnishing={furnishing}
+            billsIncluded={billsIncluded}
+            gardenAccess={gardenAccess}
+            parking={parking}
+            fireplace={fireplace}
+            descriptionType={descriptionType}
+            description={description}
             backCallback={handleBackStep}
             nextCallback={handleSubmitPropertyDetails}
           />
@@ -111,7 +135,23 @@ const AddListing: React.FC = () => {
         return (
           <StepTenancyDetails
             backCallback={handleBackStep}
-            nextCallback={handleSubmitTenancyDetails}
+            address1={address1}
+            address2={address2}
+            address3={address3}
+            postCode={postCode}
+            lat={lat}
+            lng={lng}
+            advertType={advertType}
+            propertyType={propertyType}
+            bedroomsNumber={bedroomsNumber}
+            bathroomsNumber={bathroomsNumber}
+            furnishing={furnishing}
+            billsIncluded={billsIncluded}
+            gardenAccess={gardenAccess}
+            parking={parking}
+            fireplace={fireplace}
+            descriptionType={descriptionType}
+            description={description}
           />
         );
       default:

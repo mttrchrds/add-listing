@@ -28,7 +28,7 @@ const StyledNavTop = styled("nav")(({ theme }) => {
     }
     width: 100%;
     padding: 16px 0;
-    border-bottom: 2px solid ${theme.palette.primary.main};
+    border-bottom: 2px solid ${theme.palette.primary.light};
     @media screen and (min-width: ${theme.breakpoints.values.sm}px) {
       .logo {}
       .title {}

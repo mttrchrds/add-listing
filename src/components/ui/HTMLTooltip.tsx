@@ -4,6 +4,8 @@ import Tooltip, { tooltipClasses, TooltipProps } from "@mui/material/Tooltip";
 const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
+  padding: "15px",
+  textAlign: "center",
   [`& .${tooltipClasses.arrow}`]: {
     color: theme.palette.common.black,
   },

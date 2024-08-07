@@ -13,6 +13,8 @@ interface InputFieldProps {
   error?: string;
   tooltip?: ReactNode;
   value?: string;
+  inputType?: string;
+  helperText?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -23,6 +25,8 @@ const InputField: React.FC<InputFieldProps> = ({
   tooltip,
   value = "",
   onChange,
+  inputType = "text",
+  helperText = "",
 }) => {
   const renderTooltip = () => {
     if (!tooltip) return;
@@ -48,12 +52,10 @@ const InputField: React.FC<InputFieldProps> = ({
         value={value}
         onChange={onChange}
         error={error ? true : false}
+        type={inputType === "number" ? "number" : "text"}
       />
-      {error && (
-        <FormHelperText error={true} id="accountId-error">
-          {error}
-        </FormHelperText>
-      )}
+      {error && <FormHelperText error={true}>{error}</FormHelperText>}
+      {!error && helperText && <FormHelperText>{helperText}</FormHelperText>}
     </FormControl>
   );
 };
