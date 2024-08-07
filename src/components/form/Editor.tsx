@@ -15,6 +15,9 @@ const StyledEditor = styled.div`
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
   }
+  .ql-editor {
+    min-height: 100px;
+  }
 `;
 
 interface EditorProps {
